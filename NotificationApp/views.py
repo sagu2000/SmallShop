@@ -70,7 +70,7 @@ def add_email_database(request):
         recipient, created = Recipient.objects.get_or_create(email=email, defaults={"name": name})
 
         if created:
-            return redirect('home')  # Redirect to home page after adding email
+            return redirect('home') 
         else:
             return HttpResponse("Email already exists!", status=409)
 
@@ -90,12 +90,12 @@ def login_view(request):
         })
 
     login(request, user)
-    # Restore session state (like 'shop_open') after login
+    # Restore session state after login
     if 'shop_open' in request.session:
         shop_open = request.session.get('shop_open')
         request.session['shop_open'] = shop_open
         request.session.modified = True
-    return redirect('home')  # Redirect to the homepage after successful login
+    return redirect('home')  # Redirect to the homepage after login
 
 
 def logout_view(request):
@@ -112,4 +112,4 @@ def logout_view(request):
 
 
 def about(request):
-    return render(request, 'about.html')  # Ensure about.html exists in the templates folder
+    return render(request, 'about.html')
